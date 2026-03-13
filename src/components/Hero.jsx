@@ -4,6 +4,7 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="container">
+        <img src="/logo.png" alt="Sonja's Shop" className="hero-logo" />
         <h1 className="alt-title">ROCK THE <br /> PRE-LOVED</h1>
         <p className="hero-subtext">SPECIALLY CURATED HIGH-END APPAREL, SHOES & ACCESSORIES.</p>
         <div className="hero-cta">

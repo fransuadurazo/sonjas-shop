@@ -108,12 +108,12 @@ button {
   width: auto;
   object-fit: contain;
   transition: var(--transition);
-  filter: drop-shadow(0 0 0px transparent);
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
 }
 
 .logo-img:hover {
-  filter: drop-shadow(0 0 12px var(--color-accent));
-  transform: scale(1.02) rotate(-1deg);
+  filter: drop-shadow(0 0 10px var(--color-accent));
+  transform: scale(1.05) rotate(-2deg);
 }
 
 .nav-desktop {
@@ -151,9 +151,37 @@ button {
 
 /* Hero Styles */
 .hero {
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-md) 0 var(--spacing-xl);
   text-align: center;
   border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-logo {
+  width: 100%;
+  max-width: 600px;
+  /* Massive size */
+  height: auto;
+  margin: 0 auto var(--spacing-md);
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(1deg);
+    filter: drop-shadow(0 0 40px rgba(255, 0, 64, 0.4));
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
 }
 
 .hero-subtext {
