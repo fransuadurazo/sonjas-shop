@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main # Ensure this matches your default branch
+
+media_folder: "public/assets/products"
+public_folder: "/assets/products"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "public/data"
+    extension: "json"
+    format: "json"
+    create: true
+    slug: "{{id}}-{{name}}"
+    fields:
+      - { label: "ID", name: "id", widget: "number" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { 
+          label: "Category", 
+          name: "category", 
+          widget: "select", 
+          options: ["Apparel", "Shoes", "Accessories", "Bits and Bobs", "Unique Collectibles"] 
+        }
+      - { label: "Image URL", name: "image", widget: "image" }

@@ -15,6 +15,8 @@ const Header = ({ cartCount, onCartOpen }) => {
           <a href="#apparel">APPAREL</a>
           <a href="#shoes">SHOES</a>
           <a href="#accessories">ACCESSORIES</a>
+          <a href="#bits-and-bobs">BITS & BOBS</a>
+          <a href="#unique-collectibles">COLLECTIBLES</a>
         </nav>
 
         <button className="cart-btn" onClick={onCartOpen}>
