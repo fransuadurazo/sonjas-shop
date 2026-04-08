@@ -8,7 +8,7 @@ public_folder: "/assets/products"
 collections:
   - name: "products"
     label: "Products"
-    folder: "public/data"
+    folder: "src/data/products"
     extension: "json"
     format: "json"
     create: true

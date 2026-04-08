@@ -6,16 +6,16 @@ const ProductGrid = ({ addToCart }) => {
   const CATEGORIES = ['Apparel', 'Shoes', 'Accessories', 'Bits and Bobs', 'Unique Collectibles'];
 
   useEffect(() => {
-    fetch('/data/products.json')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Error loading products:', err);
-        setLoading(false);
-      });
+    try {
+      const productModules = import.meta.glob('../data/products/*.json', { eager: true });
+      const loadedProducts = Object.values(productModules).map(module => module.default || module);
+      loadedProducts.sort((a, b) => a.id - b.id);
+      setProducts(loadedProducts);
+      setLoading(false);
+    } catch (err) {
+      console.error('Error loading products:', err);
+      setLoading(false);
+    }
   }, []);
 
   if (loading) {
