@@ -1,0 +1,11 @@
+{
+  "id": 44,
+  "name": "Scotch & Soda Black Studded Lace-Up Shirt",
+  "price": 40,
+  "sku": "APP0010",
+  "category": "Apparel",
+  "image": "/assets/products/app0010.jpg",
+  "images": [
+    "/assets/products/app0010.jpg"
+  ]
+}

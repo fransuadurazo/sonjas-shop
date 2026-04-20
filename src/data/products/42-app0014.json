@@ -1,0 +1,11 @@
+{
+  "id": 42,
+  "name": "Michael Kors Green Plaid Tie-Shirt",
+  "price": 35,
+  "sku": "APP0014",
+  "category": "Apparel",
+  "image": "/assets/products/app0014.jpg",
+  "images": [
+    "/assets/products/app0014.jpg"
+  ]
+}

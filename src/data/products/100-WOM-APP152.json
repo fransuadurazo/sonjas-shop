@@ -1,0 +1,9 @@
+{
+  "id": 100,
+  "sku": "WOM-APP152",
+  "name": "Dereon Embroidered Denim Jacket",
+  "price": 92,
+  "retailPrice": 198,
+  "category": "Apparel",
+  "images": ["/assets/products/WOM-APP152.jpg"]
+}

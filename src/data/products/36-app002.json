@@ -1,0 +1,11 @@
+{
+  "id": 36,
+  "name": "Cache Magenta Cowl Neck Ruched Mini Dress",
+  "price": 50,
+  "sku": "APP002",
+  "category": "Apparel",
+  "image": "/assets/products/app002.jpg",
+  "images": [
+    "/assets/products/app002.jpg"
+  ]
+}

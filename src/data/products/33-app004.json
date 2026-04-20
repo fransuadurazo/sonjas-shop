@@ -1,0 +1,11 @@
+{
+  "id": 33,
+  "name": "Beaded Silver Sequin Mesh Mini Dress",
+  "price": 60,
+  "sku": "APP004",
+  "category": "Apparel",
+  "image": "/assets/products/app004.jpg",
+  "images": [
+    "/assets/products/app004.jpg"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": 50,
+  "sku": "WOM-APP102",
+  "name": "Fendi Knit Dress",
+  "price": 185,
+  "retailPrice": 850,
+  "category": "Apparel",
+  "images": ["/assets/products/WOM-APP102.jpg"]
+}

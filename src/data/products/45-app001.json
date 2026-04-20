@@ -1,0 +1,11 @@
+{
+  "id": 45,
+  "name": "Street Fighter x Game Wear White Sweatshirt (back view)",
+  "price": 40,
+  "sku": "APP001",
+  "category": "Apparel",
+  "image": "/assets/products/app001.jpg",
+  "images": [
+    "/assets/products/app001.jpg"
+  ]
+}

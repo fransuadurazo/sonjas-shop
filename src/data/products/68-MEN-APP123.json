@@ -1,0 +1,9 @@
+{
+  "id": 68,
+  "sku": "MEN-APP123",
+  "name": "Rupaul Jones Knit Polo",
+  "price": 25,
+  "retailPrice": 45,
+  "category": "Apparel",
+  "images": ["/assets/products/MEN-APP123.jpg"]
+}

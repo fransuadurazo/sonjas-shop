@@ -1,0 +1,11 @@
+{
+  "id": 35,
+  "name": "CBGeneration Floral & Red Chevron Short Sleeve Shirt",
+  "price": 25,
+  "sku": "APP005",
+  "category": "Apparel",
+  "image": "/assets/products/app005.jpg",
+  "images": [
+    "/assets/products/app005.jpg"
+  ]
+}
