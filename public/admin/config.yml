@@ -24,3 +24,5 @@ collections:
           options: ["Apparel", "Shoes", "Accessories", "Bits and Bobs", "Unique Collectibles"] 
         }
       - { label: "Image URL", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "markdown", required: false }
+      - { label: "Size", name: "size", widget: "string", required: false }

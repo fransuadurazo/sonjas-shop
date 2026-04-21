@@ -52,6 +52,7 @@ const ProductImageCarousel = ({ images, alt }) => {
 const ProductGrid = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [quickViewProduct, setQuickViewProduct] = useState(null);
   const CATEGORIES = ['Apparel', 'Shoes', 'Accessories', 'Bits and Bobs', 'Unique Collectibles'];
 
   useEffect(() => {
@@ -84,48 +85,129 @@ const ProductGrid = ({ addToCart }) => {
             const men = categoryProducts.filter(p => p.sku?.startsWith('MEN-'));
             const apparelBase = categoryProducts.filter(p => !p.sku?.startsWith('WOM-') && !p.sku?.startsWith('MEN-'));
 
-            if (women.length > 0) sections.push({ title: "Women's Apparel", products: women, id: 'womens-apparel' });
-            if (men.length > 0) sections.push({ title: "Men's Apparel", products: men, id: 'mens-apparel' });
-            if (apparelBase.length > 0) sections.push({ title: "Apparel", products: apparelBase, id: 'apparel' });
+            const subGroups = [];
+            if (women.length > 0) subGroups.push({ title: "Women's", products: women });
+            if (men.length > 0) subGroups.push({ title: "Men's", products: men });
+            if (apparelBase.length > 0) subGroups.push({ title: "Other", products: apparelBase });
+
+            if (subGroups.length > 0) {
+              sections.push({ title: 'Apparel', subGroups, id: 'apparel' });
+            }
           } else {
             sections.push({ title: category, products: categoryProducts, id: category.toLowerCase().replace(/\s+/g, '-') });
           }
         });
 
+        const renderProducts = (products) => (
+          <div className="grid">
+            {products.map((product) => {
+              const allImages = product.images && product.images.length > 0
+                ? product.images
+                : [product.image];
+
+              return (
+                <div key={product.id} className="product-card" onClick={() => setQuickViewProduct(product)} style={{ cursor: 'pointer' }}>
+                  <div className="product-image">
+                    <ProductImageCarousel images={allImages} alt={product.name} />
+                    <button className="add-btn" onClick={(e) => { e.stopPropagation(); addToCart(product); }}>+ ADD TO CART</button>
+                  </div>
+                  <div className="product-info">
+                    <span className="category">{product.category}</span>
+                    <h3 className="name">{product.name}</h3>
+                    <div className="price-container">
+                      {product.retailPrice && (
+                        <span className="retail-price">Original Retail: ${product.retailPrice}</span>
+                      )}
+                      <span className="price">Sonja's Price: ${product.price}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+
         return sections.map((section) => (
           <section key={section.id} className="products" id={section.id}>
             <div className="container">
               <h2 className="section-title punk-text">{section.title}</h2>
-              <div className="grid">
-                {section.products.map((product) => {
-                  const allImages = product.images && product.images.length > 0
-                    ? product.images
-                    : [product.image];
-
-                  return (
-                    <div key={product.id} className="product-card">
-                      <div className="product-image">
-                        <ProductImageCarousel images={allImages} alt={product.name} />
-                        <button className="add-btn" onClick={() => addToCart(product)}>+ ADD TO CART</button>
-                      </div>
-                      <div className="product-info">
-                        <span className="category">{product.category}</span>
-                        <h3 className="name">{product.name}</h3>
-                        <div className="price-container">
-                          {product.retailPrice && (
-                            <span className="retail-price">Original Retail: ${product.retailPrice}</span>
-                          )}
-                          <span className="price">Sonja's Price: ${product.price}</span>
-                        </div>
-                      </div>
+              {section.subGroups ? (
+                <div className="subgroups-container">
+                  {section.subGroups.map((group, index) => (
+                    <div key={group.title} className="subcategory-group" style={{ marginBottom: '3rem' }}>
+                      {index > 0 && <hr style={{ border: 'none', borderTop: '2px solid red', margin: '2rem 0 2rem 0' }} />}
+                      <h3 className="subcategory-title punk-text" style={{ color: 'red', textTransform: 'uppercase', marginBottom: '1.5rem', fontSize: '1.5rem' }}>
+                        {group.title}
+                      </h3>
+                      {renderProducts(group.products)}
                     </div>
-                  );
-                })}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                renderProducts(section.products)
+              )}
             </div>
           </section>
         ));
       })()}
+
+      {quickViewProduct && (
+        <div className="quick-view-overlay open" onClick={() => setQuickViewProduct(null)}>
+          <div className="quick-view-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="qv-close" onClick={() => setQuickViewProduct(null)}>×</button>
+            <button className="qv-arrow qv-prev" onClick={(e) => {
+              e.stopPropagation();
+              const currentIndex = products.findIndex(p => p.id === quickViewProduct.id);
+              const prevIndex = (currentIndex - 1 + products.length) % products.length;
+              setQuickViewProduct(products[prevIndex]);
+            }}>‹</button>
+            <button className="qv-arrow qv-next" onClick={(e) => {
+              e.stopPropagation();
+              const currentIndex = products.findIndex(p => p.id === quickViewProduct.id);
+              const nextIndex = (currentIndex + 1) % products.length;
+              setQuickViewProduct(products[nextIndex]);
+            }}>›</button>
+            
+            <div className="qv-image">
+              <ProductImageCarousel images={quickViewProduct.images && quickViewProduct.images.length > 0 ? quickViewProduct.images : [quickViewProduct.image]} alt={quickViewProduct.name} />
+            </div>
+            
+            <div className="qv-details">
+              <div className="qv-category">{quickViewProduct.category}</div>
+              <h2 className="qv-title punk-text">{quickViewProduct.name}</h2>
+              <div className="qv-price-container">
+                <div className="qv-price">${quickViewProduct.price}</div>
+                {quickViewProduct.retailPrice && (
+                  <div className="qv-retail">Original: ${quickViewProduct.retailPrice}</div>
+                )}
+              </div>
+              
+              <div className="qv-meta">
+                {quickViewProduct.size && (
+                  <div className="qv-meta-item">
+                    <span className="qv-meta-label">Size:</span>
+                    <span>{quickViewProduct.size}</span>
+                  </div>
+                )}
+              </div>
+              
+              {quickViewProduct.description && (
+                <div className="qv-description">
+                  {quickViewProduct.description}
+                </div>
+              )}
+              
+              <button className="qv-add-btn" onClick={(e) => { 
+                e.stopPropagation(); 
+                addToCart(quickViewProduct); 
+                setQuickViewProduct(null); 
+              }}>
+                + Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
